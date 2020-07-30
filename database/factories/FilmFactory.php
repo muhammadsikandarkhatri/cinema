@@ -12,7 +12,7 @@ $factory->define(Film::class, function (Faker $faker) {
         'slug' => $faker->slug,
         'description' => $faker->realText(),
         'release_date' => $faker->dateTime(), // password
-        'rating' => $faker->randomDigit(),
+        'rating' => mt_rand(1, 5),
         'price' => $faker->randomNumber(2),
         'photo' => $faker->imageUrl(),
     ];
