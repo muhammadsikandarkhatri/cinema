@@ -7,6 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Film extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'release_date',
+        'rating',
+        'price',
+        'photo',
+    ];
+
+    /**
      * The relationships that should always be loaded.
      *
      * @var array
