@@ -11,6 +11,8 @@ class FilmSeeder extends Seeder
      */
     public function run()
     {
-        //
+        return factory(App\Film::class, 5)->create()->each(function ($film) {
+            $film->genres()->save(factory(App\Genre::class)->make());
+        });
     }
 }
