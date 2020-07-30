@@ -17,7 +17,7 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return new FilmCollection(Film::all());
+        return new FilmCollection(Film::paginate(10));
     }
 
     /**
@@ -39,7 +39,7 @@ class FilmController extends Controller
      */
     public function show($id)
     {
-        return new FilmResource(Film::find(1));
+        return new FilmResource(Film::find($id));
     }
 
     /**
