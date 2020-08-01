@@ -1,8 +1,24 @@
+/**
+ * Load Dependencies and Modules
+ */
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Profile from "./components/Auth/Profile";
+import Index from "./components/Films/Index";
+import Create from "./components/Films/Create";
+import Detail from "./components/Films/Detail";
 
 Vue.use(VueRouter);
 
+/**
+ * Middleware
+ * @param to
+ * @param from
+ * @param next
+ * @returns {*}
+ */
 const auth = (to, from, next) => {
     if (localStorage.getItem("authToken")) {
         return next();
@@ -19,39 +35,42 @@ const routes = [
     {
         path: "/login",
         name: "Login",
-        component: () => import("../views/Auth/Login.vue")
+        component: Login,
     },
     {
         path: "/register",
         name: "Register",
-        component: () =>
-            import("../views/Auth/Register.vue")
+        component: Register,
     },
     {
         path: "/profile",
         name: "Profile",
         beforeEnter: auth,
-        component: () => import("../views/Auth/Profile.vue")
+        component: Profile,
     },
     {
         path: "/films",
         name: "Films",
-        component: () => import("../views/Films/Index.vue")
+        component: Index,
     },
     {
         path: "/films/create",
         name: "Create a Film",
         beforeEnter: auth,
-        component: () => import("../views/Films/Create.vue")
+        component: Create,
     },
     {
         path: "/films/:slug",
         name: "Film Detail",
         props: true,
-        component: () => import("../views/Films/Detail.vue")
+        component: Detail,
     }
 ];
 
+/**
+ * Set routes
+ * @type {VueRouter}
+ */
 const router = new VueRouter({
     mode: "history",
     base: process.env.APP_URL,

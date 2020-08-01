@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Film as FilmResource;
 use App\Http\Resources\FilmCollection;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class FilmController extends Controller
 {
@@ -17,7 +19,44 @@ class FilmController extends Controller
      */
     public function index()
     {
-        return new FilmCollection(Film::paginate(10));
+        return new FilmCollection(Film::paginate(1));
+    }
+
+    /**
+     * Get a validator for an incoming film creation request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'release_date' => ['required', ''],
+            'rating' => ['required', 'string', 'min:8', 'confirmed'],
+            'price' => ['required', 'string', 'min:8', 'confirmed'],
+            'photo' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return \App\User
+     */
+    protected function createFilm(array $data)
+    {
+        return Film::create([
+            'name' => $data['name'],
+            'slug' => Str::slug($data['name'], '-'),
+            'description' => $data['description'],
+            'release_date' => $data['release_date'],
+            'rating' => $data['rating'],
+            'price' => $data['price'],
+            'photo' => $data['photo'],
+        ]);
     }
 
     /**
@@ -28,7 +67,11 @@ class FilmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validator($request->all())->validate();
+
+        event(new Registered($film = $this->createFilm($request->all())));
+
+        return new FilmResource($film);
     }
 
     /**

@@ -1,32 +1,38 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+import Vue from "vue";
+import App from "./components/App";
+import router from "./router";
+import store from "./store";
+import axios from "axios";
 
-require('./bootstrap');
+Vue.config.productionTip = false;
 
-window.Vue = require('vue');
+axios.interceptors.response.use(
+    response => response,
+    error => {
+        if (error.response.status === 422) {
+            store.commit("setErrors", error.response.data.errors);
+        } else if (error.response.status === 401) {
+            store.commit("auth/setUserData", null);
+            localStorage.removeItem("authToken");
+            router.push({ name: "Login" });
+        } else {
+            return Promise.reject(error);
+        }
+    }
+);
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+axios.interceptors.request.use(function(config) {
+    config.headers.common = {
+        Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        "Content-Type": "application/json",
+        Accept: "application/json"
+    };
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+    return config;
+});
 
 new Vue({
-    el: '#app',
-});
+    router,
+    store,
+    render: h => h(App)
+}).$mount("#app");

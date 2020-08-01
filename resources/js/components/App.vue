@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div>
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <router-link class="navbar-brand" to="/">Vue Frontpage</router-link>
+        <router-link class="navbar-brand" to="/">Cinema App</router-link>
         <button
           class="navbar-toggler"
           type="button"
