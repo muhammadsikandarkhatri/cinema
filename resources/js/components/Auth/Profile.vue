@@ -20,7 +20,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Home",
+  name: "Profile",
 
   data() {
     return {
