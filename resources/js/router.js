@@ -9,6 +9,7 @@ import Profile from "./components/Auth/Profile";
 import Index from "./components/Films/Index";
 import Create from "./components/Films/Create";
 import Detail from "./components/Films/Detail";
+import Verify from "./components/Auth/Verify";
 
 Vue.use(VueRouter);
 
@@ -41,6 +42,13 @@ const routes = [
         path: "/register",
         name: "Register",
         component: Register,
+    },
+    {
+        path: "/verify/:hash",
+        name: "Verify",
+        beforeEnter: auth,
+        props: true,
+        component: Verify,
     },
     {
         path: "/profile",

@@ -23,7 +23,7 @@ Route::prefix('v1')->namespace('APIv1')->group(function () {
     Route::post('register', 'RegisterController@register')->name('register');
 
     /**
-     * User Authentication routes
+     * User Authenticated routes
      */
     Route::group(['middleware' => ['auth:api']], function () {
         Route::get('email/verify/{hash}', 'VerificationController@verify')->name('verification.verify');
@@ -32,7 +32,7 @@ Route::prefix('v1')->namespace('APIv1')->group(function () {
         Route::post('logout', 'LoginController@logout')->name('logout');
 
         /**
-         * Films authenticated routes
+         * Film routes
          */
         Route::resource('films', 'FilmController')->only(['store', 'destroy']);
     });
