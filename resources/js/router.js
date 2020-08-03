@@ -68,7 +68,7 @@ const routes = [
         component: Create,
     },
     {
-        path: "/films/:slug",
+        path: "/film/:slug",
         name: "Film Detail",
         props: true,
         component: Detail,
