@@ -4,6 +4,10 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 
+// register jw pagination component globally
+import JwPagination from 'jw-vue-pagination';
+Vue.component('jw-pagination', JwPagination);
+
 Vue.config.productionTip = false;
 
 axios.interceptors.response.use(

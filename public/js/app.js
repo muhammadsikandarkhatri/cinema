@@ -2323,41 +2323,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Home",
+  name: "Create",
   data: function data() {
-    return {
-      success: null,
-      error: null
-    };
+    return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("auth", ["user"])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("auth", ["sendVerifyResendRequest"])), {}, {
-    verifyResend: function verifyResend() {
-      var _this = this;
-
-      this.success = this.error = null;
-      this.sendVerifyResendRequest().then(function () {
-        _this.success = "A fresh verification link has been sent to your email address.";
-      })["catch"](function (error) {
-        _this.error = "Error sending verification link.";
-        console.log(error.response);
-      });
-    }
-  })
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("film", ["user"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("film", ["createFilmRequest"]))
 });
 
 /***/ }),
@@ -2396,29 +2369,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Home",
+  name: "Detail",
+  props: ["slug"],
   data: function data() {
-    return {
-      success: null,
-      error: null
-    };
+    return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("auth", ["user"])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("auth", ["sendVerifyResendRequest"])), {}, {
-    verifyResend: function verifyResend() {
-      var _this = this;
-
-      this.success = this.error = null;
-      this.sendVerifyResendRequest().then(function () {
-        _this.success = "A fresh verification link has been sent to your email address.";
-      })["catch"](function (error) {
-        _this.error = "Error sending verification link.";
-        console.log(error.response);
-      });
-    }
-  })
+  mounted: function mounted() {
+    this.getFilmData(this.slug);
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("film", ["filmData"])),
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("film", ["getFilmData"]))
 });
 
 /***/ }),
@@ -2457,30 +2443,78 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FilmIndex",
   data: function data() {
-    return {
-      success: null,
-      error: null
-    };
+    return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("auth", ["user"])),
-  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("auth", ["sendVerifyResendRequest"])), {}, {
-    verifyResend: function verifyResend() {
+  mounted: function mounted() {
+    this.getFilmCollectionData();
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])("film", ["filmCollectionData"])),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])("film", ["getFilmCollectionData", "deleteFilmRequest"])), {}, {
+    deleteFilm: function deleteFilm() {
       var _this = this;
 
-      this.success = this.error = null;
-      this.sendVerifyResendRequest().then(function () {
-        _this.success = "A fresh verification link has been sent to your email address.";
-      })["catch"](function (error) {
-        _this.error = "Error sending verification link.";
-        console.log(error.response);
+      this.deleteFilmRequest().then(function () {
+        _this.$router.push({
+          name: "Home"
+        });
+
+        _this.getFilmCollectionData();
       });
     }
   })
 });
+
+/***/ }),
+
+/***/ "./node_modules/jw-vue-pagination/lib/JwPagination.js":
+/*!************************************************************!*\
+  !*** ./node_modules/jw-vue-pagination/lib/JwPagination.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports=function(e){var t={};function s(r){if(t[r])return t[r].exports;var a=t[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,s),a.l=!0,a.exports}return s.m=e,s.c=t,s.d=function(e,t,r){s.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},s.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(e,t){if(1&t&&(e=s(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(s.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)s.d(r,a,function(t){return e[t]}.bind(null,a));return r},s.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return s.d(t,"a",t),t},s.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},s.p="",s(s.s=1)}([function(e,t,s){"use strict";e.exports=function(e,t,s,r){void 0===t&&(t=1),void 0===s&&(s=10),void 0===r&&(r=10);var a,n,i=Math.ceil(e/s);if(t<1?t=1:t>i&&(t=i),i<=r)a=1,n=i;else{var l=Math.floor(r/2),o=Math.ceil(r/2)-1;t<=l?(a=1,n=r):t+o>=i?(a=i-r+1,n=i):(a=t-l,n=t+o)}var c=(t-1)*s,u=Math.min(c+s-1,e-1),p=Array.from(Array(n+1-a).keys()).map(function(e){return a+e});return{totalItems:e,currentPage:t,pageSize:s,totalPages:i,startPage:a,endPage:n,startIndex:c,endIndex:u,pages:p}}},function(e,t,s){"use strict";s.r(t);var r=function(){var e=this,t=e.$createElement,s=e._self._c||t;return e.pager.pages&&e.pager.pages.length?s("ul",{staticClass:"pagination",style:e.ulStyles},[s("li",{staticClass:"page-item first",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(1)}}},[e._v(e._s(e.labels.first))])]),e._v(" "),s("li",{staticClass:"page-item previous",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage-1)}}},[e._v(e._s(e.labels.previous))])]),e._v(" "),e._l(e.pager.pages,function(t){return s("li",{key:t,staticClass:"page-item page-number",class:{active:e.pager.currentPage===t},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(s){return e.setPage(t)}}},[e._v(e._s(t))])])}),e._v(" "),s("li",{staticClass:"page-item next",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage+1)}}},[e._v(e._s(e.labels.next))])]),e._v(" "),s("li",{staticClass:"page-item last",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.totalPages)}}},[e._v(e._s(e.labels.last))])])],2):e._e()};r._withStripped=!0;var a=s(0),n=s.n(a);function i(e,t){var s=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),s.push.apply(s,r)}return s}function l(e){for(var t=1;t<arguments.length;t++){var s=null!=arguments[t]?arguments[t]:{};t%2?i(s,!0).forEach(function(t){o(e,t,s[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(s)):i(s).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(s,t))})}return e}function o(e,t,s){return t in e?Object.defineProperty(e,t,{value:s,enumerable:!0,configurable:!0,writable:!0}):e[t]=s,e}var c={first:"First",last:"Last",previous:"Previous",next:"Next"},u={margin:0,padding:0,display:"inline-block"},p={listStyle:"none",display:"inline",textAlign:"center"},g={cursor:"pointer",padding:"6px 12px",display:"block",float:"left"};var f=function(e,t,s,r,a,n,i,l){var o,c="function"==typeof e?e.options:e;if(t&&(c.render=t,c.staticRenderFns=s,c._compiled=!0),r&&(c.functional=!0),n&&(c._scopeId="data-v-"+n),i?(o=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),a&&a.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(i)},c._ssrRegister=o):a&&(o=l?function(){a.call(this,this.$root.$options.shadowRoot)}:a),o)if(c.functional){c._injectStyles=o;var u=c.render;c.render=function(e,t){return o.call(t),u(e,t)}}else{var p=c.beforeCreate;c.beforeCreate=p?[].concat(p,o):[o]}return{exports:e,options:c}}({props:{items:{type:Array,required:!0},initialPage:{type:Number,default:1},pageSize:{type:Number,default:10},maxPages:{type:Number,default:10},labels:{type:Object,default:function(){return c}},styles:{type:Object},disableDefaultStyles:{type:Boolean,default:!1}},data:function(){return{pager:{},ulStyles:{},liStyles:{},aStyles:{}}},created:function(){if(!this.$listeners.changePage)throw'Missing required event listener: "changePage"';this.disableDefaultStyles||(this.ulStyles=u,this.liStyles=p,this.aStyles=g),this.styles&&(this.ulStyles=l({},this.ulStyles,{},this.styles.ul),this.liStyles=l({},this.liStyles,{},this.styles.li),this.aStyles=l({},this.aStyles,{},this.styles.a)),this.setPage(this.initialPage)},methods:{setPage:function(e){var t=this.items,s=this.pageSize,r=this.maxPages,a=n()(t.length,e,s,r),i=t.slice(a.startIndex,a.endIndex+1);this.pager=a,this.$emit("changePage",i)}},watch:{items:function(){this.setPage(this.initialPage)}}},r,[],!1,null,null,null);f.options.__file="src/JwPagination.vue";t.default=f.exports}]);
 
 /***/ }),
 
@@ -2968,7 +3002,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("header", [
+    _c("header", { staticClass: "mb-5" }, [
       _c(
         "nav",
         {
@@ -3616,39 +3650,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "home mt-5" }, [
-    _vm.success
-      ? _c(
-          "div",
-          { staticClass: "alert alert-success", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.success) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.error
-      ? _c(
-          "div",
-          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.error) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.user
-      ? _c("h2", [_vm._v("Welcome, please log in or register")])
-      : !_vm.user.email_verified_at
-      ? _c("h2", [
-          _vm._v(
-            "\n    Hello, " +
-              _vm._s(_vm.user.name) +
-              "! Registration successful, please check your inbox\n    and click confirmation link. If you did not receive the email, click\n    "
-          ),
-          _c("a", { attrs: { href: "#" }, on: { click: _vm.verifyResend } }, [
-            _vm._v("here")
-          ]),
-          _vm._v(" to request another\n  ")
-        ])
-      : _c("h2", [_vm._v("Hello, " + _vm._s(_vm.user.name) + "! You're in.")])
-  ])
+  return _c("div", { staticClass: "home mt-5" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3672,41 +3674,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "home mt-5" }, [
-    _vm.success
-      ? _c(
-          "div",
-          { staticClass: "alert alert-success", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.success) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.error
-      ? _c(
-          "div",
-          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.error) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.user
-      ? _c("h2", [_vm._v("Welcome, please log in or register")])
-      : !_vm.user.email_verified_at
-      ? _c("h2", [
-          _vm._v(
-            "\n    Hello, " +
-              _vm._s(_vm.user.name) +
-              "! Registration successful, please check your inbox\n    and click confirmation link. If you did not receive the email, click\n    "
-          ),
-          _c("a", { attrs: { href: "#" }, on: { click: _vm.verifyResend } }, [
-            _vm._v("here")
+  return _c("div", { staticClass: "mt-5" }, [
+    _c("div", { staticClass: "movie-card" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "movie-content" }, [
+        _c("div", { staticClass: "movie-content-header" }, [
+          _c("a", { attrs: { href: "#" } }, [
+            _c("h3", { staticClass: "movie-title" }, [
+              _vm._v(_vm._s(_vm.filmData.data.name))
+            ])
           ]),
-          _vm._v(" to request another\n  ")
-        ])
-      : _c("h2", [_vm._v("Hello, " + _vm._s(_vm.user.name) + "! You're in.")])
+          _vm._v(" "),
+          _c("div", { staticClass: "imax-logo" })
+        ]),
+        _vm._v(" "),
+        _vm._m(1)
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "movie-header manOfSteel" }, [
+      _c("div", { staticClass: "header-icon-container" }, [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", { staticClass: "material-icons header-icon" }, [_vm._v("")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "movie-info" }, [
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Date & Time")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("Sun 8 Sept - 10:00PM")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Screen")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("03")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Row")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("F")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Seat")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("21,22")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -3728,41 +3759,133 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "home mt-5" }, [
-    _vm.success
-      ? _c(
-          "div",
-          { staticClass: "alert alert-success", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.success) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.error
-      ? _c(
-          "div",
-          { staticClass: "alert alert-danger", attrs: { role: "alert" } },
-          [_vm._v("\n    " + _vm._s(_vm.error) + "\n  ")]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    !_vm.user
-      ? _c("h2", [_vm._v("Welcome, please log in or register")])
-      : !_vm.user.email_verified_at
-      ? _c("h2", [
-          _vm._v(
-            "\n    Hello, " +
-              _vm._s(_vm.user.name) +
-              "! Registration successful, please check your inbox\n    and click confirmation link. If you did not receive the email, click\n    "
-          ),
-          _c("a", { attrs: { href: "#" }, on: { click: _vm.verifyResend } }, [
-            _vm._v("here")
-          ]),
-          _vm._v(" to request another\n  ")
+  return _c(
+    "div",
+    { staticClass: "home mt-5" },
+    [
+      _vm._l(_vm.filmCollectionData.data, function(item) {
+        return _c("div", { key: item.id, staticClass: "movie-card" }, [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c("div", { staticClass: "movie-content" }, [
+            _c("div", { staticClass: "movie-content-header" }, [
+              _c(
+                "h3",
+                { staticClass: "movie-title" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link",
+                      attrs: { to: { path: "/film/" + item.slug } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.name) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "imax-logo" })
+            ]),
+            _vm._v(" "),
+            _vm._m(1, true)
+          ])
         ])
-      : _c("h2", [_vm._v("Hello, " + _vm._s(_vm.user.name) + "! You're in.")])
-  ])
+      }),
+      _vm._v(" "),
+      _vm._m(2)
+    ],
+    2
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "movie-header manOfSteel" }, [
+      _c("div", { staticClass: "header-icon-container" }, [
+        _c("a", { attrs: { href: "#" } }, [
+          _c("i", { staticClass: "material-icons header-icon" }, [_vm._v("")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "movie-info" }, [
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Date & Time")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("Sun 8 Sept - 10:00PM")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Screen")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("03")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Row")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("F")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "info-section" }, [
+        _c("label", [_vm._v("Seat")]),
+        _vm._v(" "),
+        _c("span", [_vm._v("21,22")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+      _c("ul", { staticClass: "pagination" }, [
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("Previous")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("1")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("2")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("3")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "page-item" }, [
+          _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+            _vm._v("Next")
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -20204,11 +20327,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
+ // register jw pagination component globally
 
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('jw-pagination', jw_vue_pagination__WEBPACK_IMPORTED_MODULE_5___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.productionTip = false;
 axios__WEBPACK_IMPORTED_MODULE_4___default.a.interceptors.response.use(function (response) {
   return response;
@@ -20875,7 +21003,7 @@ var routes = [{
   beforeEnter: auth,
   component: _components_Films_Create__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
-  path: "/films/:slug",
+  path: "/film/:slug",
   name: "Film Detail",
   props: true,
   component: _components_Films_Detail__WEBPACK_IMPORTED_MODULE_7__["default"]
@@ -21011,6 +21139,7 @@ __webpack_require__.r(__webpack_exports__);
       var commit = _ref.commit;
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("http://dev.cinema.com/api/v1/" + "films/" + slug).then(function (response) {
         commit("setFilmData", response.data);
+        console.log(response.data);
       })["catch"](function (err) {
         console.log(err);
       });
