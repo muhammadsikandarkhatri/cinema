@@ -80,9 +80,10 @@ class FilmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        return new FilmResource(Film::find($id));
+        $item = Film::where('slug', $slug)->first();
+        return new FilmResource($item);
     }
 
     /**
@@ -93,6 +94,11 @@ class FilmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Film::destroy($id);
+        } catch (\Exception $e){
+            return new Response('', 204);
+        }
+        return new Response('', 204);
     }
 }

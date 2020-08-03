@@ -40,6 +40,8 @@ Route::prefix('v1')->namespace('APIv1')->group(function () {
     /**
      * Films guest routes
      */
-    Route::resource('films', 'FilmController')->only(['index', 'show']);
+    Route::resource('films', 'FilmController')->only(['index', 'show'])->parameters([
+        'films' => 'slug'
+    ]);
 
 });
