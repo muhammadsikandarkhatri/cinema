@@ -28,6 +28,7 @@ export default {
         .get(process.env.MIX_VUE_APP_API_URL + "films/" + slug)
         .then(response => {
           commit("setFilmData", response.data);
+            console.log(response.data);
         })
         .catch((err) => {
             console.log(err);
