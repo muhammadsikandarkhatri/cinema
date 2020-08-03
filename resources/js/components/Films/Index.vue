@@ -1,53 +1,86 @@
 <template>
-  <div class="home mt-5">
-    <div class="alert alert-success" role="alert" v-if="success">
-      {{ success }}
+    <div class="home mt-5">
+
+        <div class="movie-card" v-for="item in filmCollectionData.data" :key="item.id">
+            <div class="movie-header manOfSteel">
+                <div class="header-icon-container">
+                    <a href="#">
+                        <i class="material-icons header-icon"></i>
+                    </a>
+                </div>
+            </div><!--movie-header-->
+            <div class="movie-content">
+                <div class="movie-content-header">
+                        <h3 class="movie-title">
+                            <router-link class="nav-link" :to="{ path: `/film/${item.slug}` }">
+                                {{item.name}}
+                            </router-link>
+                        </h3>
+                    <div class="imax-logo"></div>
+                </div>
+                <div class="movie-info">
+                    <div class="info-section">
+                        <label>Date & Time</label>
+                        <span>Sun 8 Sept - 10:00PM</span>
+                    </div><!--date,time-->
+                    <div class="info-section">
+                        <label>Screen</label>
+                        <span>03</span>
+                    </div><!--screen-->
+                    <div class="info-section">
+                        <label>Row</label>
+                        <span>F</span>
+                    </div><!--row-->
+                    <div class="info-section">
+                        <label>Seat</label>
+                        <span>21,22</span>
+                    </div><!--seat-->
+                </div>
+            </div><!--movie-content-->
+        </div><!--movie-card-->
+
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+
     </div>
-    <div class="alert alert-danger" role="alert" v-if="error">
-      {{ error }}
-    </div>
-    <h2 v-if="!user">Welcome, please log in or register</h2>
-    <h2 v-else-if="!user.email_verified_at">
-      Hello, {{ user.name }}! Registration successful, please check your inbox
-      and click confirmation link. If you did not receive the email, click
-      <a href="#" @click="verifyResend">here</a> to request another
-    </h2>
-    <h2 v-else>Hello, {{ user.name }}! You're in.</h2>
-  </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+    import {mapGetters, mapActions} from "vuex";
 
-export default {
-  name: "FilmIndex",
+    export default {
+        name: "FilmIndex",
 
-  data() {
-    return {
-      success: null,
-      error: null
+        data() {
+            return {};
+        },
+
+        mounted() {
+            this.getFilmCollectionData();
+        },
+
+        computed: {
+            ...mapGetters("film", ["filmCollectionData"])
+        },
+
+        methods: {
+            ...mapActions("film", ["getFilmCollectionData", "deleteFilmRequest"]),
+
+            deleteFilm(){
+                this.deleteFilmRequest()
+                .then(() => {
+                    this.$router.push({ name: "Home" });
+                    this.getFilmCollectionData();
+                });
+            }
+        }
     };
-  },
-
-  computed: {
-    ...mapGetters("auth", ["user"])
-  },
-
-  methods: {
-    ...mapActions("auth", ["sendVerifyResendRequest"]),
-
-    verifyResend() {
-      this.success = this.error = null;
-      this.sendVerifyResendRequest()
-        .then(() => {
-          this.success =
-            "A fresh verification link has been sent to your email address.";
-        })
-        .catch(error => {
-          this.error = "Error sending verification link.";
-          console.log(error.response);
-        });
-    }
-  }
-};
 </script>
