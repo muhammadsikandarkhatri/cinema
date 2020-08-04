@@ -35,12 +35,15 @@ Route::prefix('v1')->namespace('APIv1')->group(function () {
          * Film routes
          */
         Route::resource('films', 'FilmController')->only(['store', 'destroy']);
+        Route::get('countryList', 'CountryController@countryList')->name('countryList');
     });
 
     /**
      * Films guest routes
      */
-    Route::resource('films', 'FilmController')->only(['index', 'show'])->parameters([
+    Route::resource('films', 'FilmController')
+    ->only(['index', 'show'])
+    ->parameters([
         'films' => 'slug'
     ]);
 
