@@ -10,6 +10,7 @@ import Index from "./components/Films/Index";
 import Create from "./components/Films/Create";
 import Detail from "./components/Films/Detail";
 import Verify from "./components/Auth/Verify";
+import NotFoundComponent from "./components/NotFoundComponent";
 
 /**
  * Inject Vue router in Vue
@@ -84,6 +85,10 @@ const routes = [
         name: "Film Detail",
         props: true,
         component: Detail,
+    },
+    {
+        path: '*',
+        component: NotFoundComponent,
     }
 ];
 
