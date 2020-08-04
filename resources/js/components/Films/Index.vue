@@ -11,11 +11,11 @@
             </div><!--movie-header-->
             <div class="movie-content">
                 <div class="movie-content-header">
-                        <h3 class="movie-title">
-                            <router-link class="nav-link" :to="{ path: `/film/${item.slug}` }">
-                                {{item.name}}
-                            </router-link>
-                        </h3>
+                    <h3 class="movie-title">
+                        <router-link class="nav-link" :to="{ path: `/film/${item.slug}` }">
+                            {{item.name}}
+                        </router-link>
+                    </h3>
                     <div class="imax-logo"></div>
                 </div>
                 <div class="movie-info">
@@ -74,12 +74,12 @@
         methods: {
             ...mapActions("film", ["getFilmCollectionData", "deleteFilmRequest"]),
 
-            deleteFilm(){
+            deleteFilm() {
                 this.deleteFilmRequest()
-                .then(() => {
-                    this.$router.push({ name: "Home" });
-                    this.getFilmCollectionData();
-                });
+                    .then(() => {
+                        this.$router.push({name: "FilmIndex"});
+                        this.getFilmCollectionData();
+                    });
             }
         }
     };

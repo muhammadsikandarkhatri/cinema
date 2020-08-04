@@ -69,7 +69,7 @@ export default {
   methods: {
     ...mapActions("auth", ["sendLoginRequest"]),
 
-    login: function() {
+    login() {
       this.sendLoginRequest(this.details).then(() => {
         this.$router.push({ name: "Home" });
       });

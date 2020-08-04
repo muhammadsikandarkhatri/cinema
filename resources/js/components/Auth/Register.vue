@@ -95,7 +95,7 @@ export default {
   methods: {
     ...mapActions("auth", ["sendRegisterRequest"]),
 
-    register: function() {
+    register () {
       this.sendRegisterRequest(this.details).then(() => {
         this.$router.push({ name: "Home" });
       });
