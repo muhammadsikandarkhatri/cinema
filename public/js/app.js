@@ -2719,6 +2719,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FilmIndex",
@@ -4500,6 +4504,7 @@ var render = function() {
               "button",
               {
                 staticClass: "page-link",
+                attrs: { disabled: !_vm.pagination.prev_page_url },
                 on: {
                   click: function($event) {
                     return _vm.getFilmCollectionData(
@@ -4527,6 +4532,7 @@ var render = function() {
               "button",
               {
                 staticClass: "page-link",
+                attrs: { disabled: !_vm.pagination.next_page_url },
                 on: {
                   click: function($event) {
                     return _vm.getFilmCollectionData(

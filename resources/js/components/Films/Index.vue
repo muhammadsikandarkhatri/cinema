@@ -61,13 +61,17 @@
                 <li class="page-item">
                     <button class="page-link"
                             v-on:click="getFilmCollectionData(pagination.prev_page_url)"
+                            :disabled="!pagination.prev_page_url"
                     >Previous</button>
                 </li>
                 <li class="page-item">
                     <button class="page-link">{{ pagination.current_page }} of {{ pagination.last_page }}</button>
                 </li>
                 <li class="page-item">
-                    <button class="page-link" v-on:click="getFilmCollectionData(pagination.next_page_url)">Next</button>
+                    <button class="page-link"
+                            v-on:click="getFilmCollectionData(pagination.next_page_url)"
+                            :disabled="!pagination.next_page_url"
+                    >Next</button>
                 </li>
             </ul>
         </nav>
