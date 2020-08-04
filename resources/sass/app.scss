@@ -64,8 +64,7 @@ a:hover {
 .movie-card {
     background: #ffffff;
     box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 315px;
+    width: 700px;
     margin: 2em;
     border-radius: 10px;
     display: inline-block;
@@ -208,4 +207,8 @@ a:hover {
 
 .checked {
     color: orange;
+}
+
+.card {
+    min-width: 400px;
 }
