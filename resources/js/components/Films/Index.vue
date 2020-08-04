@@ -2,10 +2,10 @@
     <div class="home mt-5">
 
         <div class="movie-card" v-for="item in filmCollectionData.data" :key="item.id">
-            <div class="movie-header manOfSteel">
+            <div class="movie-header manOfSteel" v-bind:style="{ backgroundImage: 'url(/storage/' + item.photo + ')' }">
                 <div class="header-icon-container">
                     <a href="#">
-                        <i class="material-icons header-icon"></i>
+                        <i class="material-icons header-icon"></i>
                     </a>
                 </div>
             </div><!--movie-header-->
@@ -13,28 +13,44 @@
                 <div class="movie-content-header">
                     <h3 class="movie-title">
                         <router-link class="nav-link" :to="{ path: `/film/${item.slug}` }">
-                            {{item.name}}
+                            {{ item.name }}
                         </router-link>
                     </h3>
-                    <div class="imax-logo"></div>
                 </div>
                 <div class="movie-info">
                     <div class="info-section">
-                        <label>Date & Time</label>
-                        <span>Sun 8 Sept - 10:00PM</span>
+                        <label>Release Date</label>
+                        <span>{{ item.release_date | moment("dddd, MMMM Do YYYY") }}</span>
                     </div><!--date,time-->
                     <div class="info-section">
-                        <label>Screen</label>
-                        <span>03</span>
+                        <label>Rating</label>
+                        <span class="fa fa-star"
+                              v-bind:class="{ checked: index <= item.rating }"
+                              v-for="index in 5"
+                              :key="index"
+                        ></span>
                     </div><!--screen-->
+                </div>
+                <div class="movie-info">
                     <div class="info-section">
-                        <label>Row</label>
-                        <span>F</span>
-                    </div><!--row-->
+                        <label>Description</label>
+                        <span>{{ item.description }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
+                </div>
+                <div class="movie-info">
                     <div class="info-section">
-                        <label>Seat</label>
-                        <span>21,22</span>
-                    </div><!--seat-->
+                        <label>Price</label>
+                        <span>${{ item.price }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
+                </div>
+                <div class="movie-info">
+                    <div class="info-section">
+                        <label>Country</label>
+                        <span>{{ item.country.name }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
                 </div>
             </div><!--movie-content-->
         </div><!--movie-card-->

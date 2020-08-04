@@ -2,37 +2,53 @@
     <div class="mt-5">
 
         <div class="movie-card">
-            <div class="movie-header manOfSteel">
+            <div class="movie-header manOfSteel"  v-bind:style="{ backgroundImage: 'url(/storage/' + filmData.data.photo + ')' }">
                 <div class="header-icon-container">
                     <a href="#">
-                        <i class="material-icons header-icon"></i>
+                        <i class="material-icons header-icon"></i>
                     </a>
                 </div>
             </div><!--movie-header-->
             <div class="movie-content">
                 <div class="movie-content-header">
                     <a href="#">
-                        <h3 class="movie-title">{{ filmData.name }}</h3>
+                        <h3 class="movie-title">{{ filmData.data.name }}</h3>
                     </a>
-                    <div class="imax-logo"></div>
                 </div>
                 <div class="movie-info">
                     <div class="info-section">
                         <label>Release Date</label>
-                        <span>{{  }}</span>
+                        <span>{{ filmData.data.release_date | moment("dddd, MMMM Do YYYY") }}</span>
                     </div><!--date,time-->
                     <div class="info-section">
-                        <label>Screen</label>
-                        <span>03</span>
+                        <label>Rating</label>
+                        <span class="fa fa-star"
+                              v-bind:class="{ checked: index <= filmData.data.rating }"
+                              v-for="index in 5"
+                              :key="index"
+                        ></span>
                     </div><!--screen-->
+                </div>
+                <div class="movie-info">
                     <div class="info-section">
-                        <label>Row</label>
-                        <span>F</span>
-                    </div><!--row-->
+                        <label>Description</label>
+                        <span>{{ filmData.data.description }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
+                </div>
+                <div class="movie-info">
                     <div class="info-section">
-                        <label>Seat</label>
-                        <span>21,22</span>
-                    </div><!--seat-->
+                        <label>Price</label>
+                        <span>${{ filmData.data.price }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
+                </div>
+                <div class="movie-info">
+                    <div class="info-section">
+                        <label>Country</label>
+                        <span>{{ filmData.data.country.name }}</span>
+                    </div><!--Description-->
+                    <div class="info-section"></div>
                 </div>
             </div><!--movie-content-->
         </div><!--movie-card-->
