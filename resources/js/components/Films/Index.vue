@@ -42,11 +42,17 @@
 
         <nav aria-label="Page navigation example">
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                <li class="page-item">
+                    <button class="page-link"
+                            v-on:click="getFilmCollectionData(pagination.prev_page_url)"
+                    >Previous</button>
+                </li>
+                <li class="page-item">
+                    <button class="page-link">{{ pagination.current_page }} of {{ pagination.last_page }}</button>
+                </li>
+                <li class="page-item">
+                    <button class="page-link" v-on:click="getFilmCollectionData(pagination.next_page_url)">Next</button>
+                </li>
             </ul>
         </nav>
 
@@ -60,15 +66,17 @@
         name: "FilmIndex",
 
         data() {
-            return {};
+            return {
+                url: `${process.env.MIX_VUE_APP_API_URL}films`,
+            };
         },
 
         mounted() {
-            this.getFilmCollectionData();
+            this.getFilmCollectionData(this.url);
         },
 
         computed: {
-            ...mapGetters("film", ["filmCollectionData"])
+            ...mapGetters("film", ["filmCollectionData", "pagination"])
         },
 
         methods: {

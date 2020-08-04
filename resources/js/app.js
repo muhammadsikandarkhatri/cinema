@@ -3,7 +3,6 @@ import App from "./components/App";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
-import JwPagination from 'jw-vue-pagination';
 import Datepicker from 'vuejs-datepicker';
 import VueMoment from 'vue-moment';
 
@@ -42,7 +41,6 @@ axios.interceptors.request.use(function(config) {
 /**
  * register components globally
  */
-Vue.component('jw-pagination', JwPagination);
 Vue.component('datepicker', Datepicker);
 
 /**
