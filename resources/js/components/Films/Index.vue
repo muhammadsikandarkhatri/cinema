@@ -87,7 +87,7 @@
 
         data() {
             return {
-                url: `${process.env.MIX_VUE_APP_API_URL}films`,
+                url: `${process.env.MIX_VUE_APP_API_URL}/films`,
             };
         },
 

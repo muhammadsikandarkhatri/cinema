@@ -35,7 +35,7 @@ export default {
     actions: {
         getFilmData({commit}, slug) {
             axios
-                .get(process.env.MIX_VUE_APP_API_URL + "films/" + slug)
+                .get(process.env.MIX_VUE_APP_API_URL + "/films/" + slug)
                 .then(response => {
                     commit("setFilmData", response.data);
                 })
@@ -64,7 +64,7 @@ export default {
         },
         getCountriesCollectionData({commit}) {
             axios
-                .get(process.env.MIX_VUE_APP_API_URL + "countryList")
+                .get(process.env.MIX_VUE_APP_API_URL + "/countryList")
                 .then(response => {
                     commit("setCountryCollectionData", response.data);
                 })
@@ -75,7 +75,7 @@ export default {
         createFilmRequest({commit}, data) {
             commit("setErrors", {}, {root: true});
             return axios
-                .post(process.env.MIX_VUE_APP_API_URL + "films", data)
+                .post(process.env.MIX_VUE_APP_API_URL + "/films", data)
                 .then(response => {
                     commit("setFilmData", response.data);
                 });
@@ -83,7 +83,7 @@ export default {
         deleteFilmRequest({commit}, id) {
             commit("setErrors", {}, {root: true});
             return axios
-                .post(process.env.MIX_VUE_APP_API_URL + "films/" + id)
+                .post(process.env.MIX_VUE_APP_API_URL + "/films/" + id)
                 .then(response => {
                     commit("setFilmData", null);
                 });

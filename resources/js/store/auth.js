@@ -20,7 +20,7 @@ export default {
     actions: {
         getUserData({commit}) {
             axios
-                .get(process.env.MIX_VUE_APP_API_URL + "user")
+                .get(process.env.MIX_VUE_APP_API_URL + "/user")
                 .then(response => {
                     commit("setUserData", response.data);
                 })
@@ -31,7 +31,7 @@ export default {
         sendLoginRequest({commit}, data) {
             commit("setErrors", {}, {root: true});
             return axios
-                .post(process.env.MIX_VUE_APP_API_URL + "login", data)
+                .post(process.env.MIX_VUE_APP_API_URL + "/login", data)
                 .then(response => {
                     commit("setUserData", response.data.user);
                     localStorage.setItem("authToken", response.data.token);
@@ -40,24 +40,24 @@ export default {
         sendRegisterRequest({commit}, data) {
             commit("setErrors", {}, {root: true});
             return axios
-                .post(process.env.MIX_VUE_APP_API_URL + "register", data)
+                .post(process.env.MIX_VUE_APP_API_URL + "/register", data)
                 .then(response => {
                     commit("setUserData", response.data.user);
                     localStorage.setItem("authToken", response.data.token);
                 });
         },
         sendLogoutRequest({commit}) {
-            axios.post(process.env.MIX_VUE_APP_API_URL + "logout").then(() => {
+            axios.post(process.env.MIX_VUE_APP_API_URL + "/logout").then(() => {
                 commit("setUserData", null);
                 localStorage.removeItem("authToken");
             });
         },
         sendVerifyResendRequest() {
-            return axios.get(process.env.MIX_VUE_APP_API_URL + "email/resend");
+            return axios.get(process.env.MIX_VUE_APP_API_URL + "/email/resend");
         },
         sendVerifyRequest({dispatch}, hash) {
             return axios
-                .get(process.env.MIX_VUE_APP_API_URL + "email/verify/" + hash)
+                .get(process.env.MIX_VUE_APP_API_URL + "/email/verify/" + hash)
                 .then(() => {
                     dispatch("getUserData");
                 });
