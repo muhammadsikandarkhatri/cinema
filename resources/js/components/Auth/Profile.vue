@@ -41,7 +41,7 @@ export default {
       this.sendVerifyResendRequest()
         .then(() => {
           this.success =
-            "A fresh verification link has been sent to your email address.";
+            "A new verification link has been sent to your email address.";
         })
         .catch(error => {
           this.error = "Error sending verification link.";

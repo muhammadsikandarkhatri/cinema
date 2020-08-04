@@ -12,14 +12,14 @@
             <div class="movie-content">
                 <div class="movie-content-header">
                     <a href="#">
-                        <h3 class="movie-title">{{filmData.data.name}}</h3>
+                        <h3 class="movie-title">{{ filmData.name }}</h3>
                     </a>
                     <div class="imax-logo"></div>
                 </div>
                 <div class="movie-info">
                     <div class="info-section">
-                        <label>Date & Time</label>
-                        <span>Sun 8 Sept - 10:00PM</span>
+                        <label>Release Date</label>
+                        <span>{{  }}</span>
                     </div><!--date,time-->
                     <div class="info-section">
                         <label>Screen</label>

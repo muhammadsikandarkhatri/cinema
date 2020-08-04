@@ -12,6 +12,7 @@ class Film extends Model
      * @var array
      */
     protected $fillable = [
+        'country_id',
         'name',
         'slug',
         'description',

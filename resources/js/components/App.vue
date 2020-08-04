@@ -67,7 +67,7 @@
 
             logout() {
                 this.sendLogoutRequest();
-                this.$router.push("/");
+                // this.$router.push({ name: "Films" });
             }
         }
     };

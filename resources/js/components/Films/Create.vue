@@ -54,7 +54,7 @@
                         <select v-model="details.rating" id="rating"
                                 class="form-control"
                                 :class="{ 'is-invalid': errors.rating }">
-                            <option value="" selected>Select Rating</option>
+                            <option value="null" selected>Select Rating</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -81,11 +81,25 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <select v-model="details.country" id="country"
+                                class="form-control"
+                                :class="{ 'is-invalid': errors.country }">
+                            <option v-for="item in countries.data" :value="item.id" :key="item.id">
+                                {{ item.name }}
+                            </option>
+                        </select>
+                        <div class="invalid-feedback" v-if="errors.country">
+                            {{ errors.country[0] }}
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <label for="photo">Photo</label>
                         <input type="file" accept="image/jpeg" @change="onSelectPhoto">
-                        <div class="invalid-feedback" v-if="errors.photo">
+                        <div class="invalid-feedback" style="display:block;" v-if="errors.photo">
                             {{ errors.photo[0] }}
                         </div>
                         <div style="max-width: 100px;">
@@ -94,7 +108,7 @@
                     </div>
 
                     <button type="button" @click="create" class="btn btn-primary">
-                        Add
+                        Add Film
                     </button>
                 </form>
             </div>
@@ -116,6 +130,7 @@
                     release_date: new Date(),
                     rating: null,
                     price: 0.00,
+                    country: null,
                     photo: null
                 },
                 previewImage: null,
@@ -123,20 +138,27 @@
         },
 
         computed: {
-            ...mapGetters(["errors"])
+            ...mapGetters({
+                "errors": "errors",
+                "countries": "film/countryCollectionData"
+            }),
         },
 
         mounted() {
             this.$store.commit("setErrors", {});
+            /**
+             * Get countries list
+             */
+            this.getCountriesCollectionData();
         },
 
         methods: {
-            ...mapActions("film", ["createFilmRequest"]),
+            ...mapActions("film", ["createFilmRequest", "getCountriesCollectionData"]),
 
             create() {
                 const data = this.makeFormData();
                 this.createFilmRequest(data).then(() => {
-                    this.$router.push({name: "FilmIndex"});
+                    this.$router.push({ name: "Films" });
                 });
             },
 
@@ -157,6 +179,9 @@
             makeFormData() {
                 const fd = new FormData();
                 for (let [key, value] of Object.entries(this.details)) {
+                    if(value === null){
+                        continue;
+                    }
                     switch (key) {
                         case 'photo':
                             fd.append(key, value, value.name);

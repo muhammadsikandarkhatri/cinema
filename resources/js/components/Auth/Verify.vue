@@ -22,7 +22,7 @@ export default {
   mounted() {
     this.sendVerifyRequest(this.hash)
       .then(() => {
-        this.$router.push("/");
+          this.$router.push({ name: "Films" });
       })
       .catch(error => {
         console.log(error.response);

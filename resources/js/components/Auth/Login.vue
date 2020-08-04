@@ -71,7 +71,7 @@ export default {
 
     login() {
       this.sendLoginRequest(this.details).then(() => {
-        this.$router.push({ name: "Home" });
+        this.$router.push({ name: "Films" });
       });
     }
   }
