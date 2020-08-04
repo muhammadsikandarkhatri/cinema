@@ -33,10 +33,10 @@ class FilmController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string'],
-            'release_date' => ['required', ''],
-            'rating' => ['required', 'string', 'min:8', 'confirmed'],
-            'price' => ['required', 'string', 'min:8', 'confirmed'],
-            'photo' => ['required', 'string', 'min:8', 'confirmed'],
+            'release_date' => ['required', 'date'],
+            'rating' => ['required', 'digits_between:1,5'],
+            'price' => ['required', 'numeric'],
+            'photo' => ['required', 'image'],
         ]);
     }
 
