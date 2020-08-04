@@ -11,15 +11,25 @@ import Create from "./components/Films/Create";
 import Detail from "./components/Films/Detail";
 import Verify from "./components/Auth/Verify";
 
+/**
+ * Inject Vue router in Vue
+ */
 Vue.use(VueRouter);
 
 /**
- * Middleware
+ * Middlewares
  * @param to
  * @param from
  * @param next
  * @returns {*}
  */
+const guest = (to, from, next) => {
+    if (!localStorage.getItem("authToken")) {
+        return next();
+    } else {
+        return next("/");
+    }
+};
 const auth = (to, from, next) => {
     if (localStorage.getItem("authToken")) {
         return next();
@@ -36,11 +46,13 @@ const routes = [
     {
         path: "/login",
         name: "Login",
+        beforeEnter: guest,
         component: Login,
     },
     {
         path: "/register",
         name: "Register",
+        beforeEnter: guest,
         component: Register,
     },
     {
