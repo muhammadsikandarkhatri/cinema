@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\APIv1;
 
+use App\Events\FilmCreated;
 use App\Film;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Film as FilmResource;
 use App\Http\Resources\FilmCollection;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class FilmController extends Controller
 {
@@ -35,7 +38,8 @@ class FilmController extends Controller
             'description' => ['required', 'string'],
             'release_date' => ['required', 'date'],
             'rating' => ['required', 'digits_between:1,5'],
-            'price' => ['required', 'numeric'],
+            'price' => ['required', 'numeric', 'min:1'],
+            'country' => ['required', 'exists:countries,id'],
             'photo' => ['required', 'image'],
         ]);
     }
@@ -49,13 +53,14 @@ class FilmController extends Controller
     protected function createFilm(array $data)
     {
         return Film::create([
+            'country_id' => $data['country'],
             'name' => $data['name'],
             'slug' => Str::slug($data['name'], '-'),
             'description' => $data['description'],
-            'release_date' => $data['release_date'],
+            'release_date' => Carbon::parse($data['release_date'])->format('yy-m-d'),
             'rating' => $data['rating'],
             'price' => $data['price'],
-            'photo' => $data['photo'],
+            'photo' => isset($data['photo_path']) ? $data['photo_path'] : '',
         ]);
     }
 
@@ -69,7 +74,12 @@ class FilmController extends Controller
     {
         $this->validator($request->all())->validate();
 
-        event(new Registered($film = $this->createFilm($request->all())));
+        if ($request->file('photo')->isValid()) {
+            $path = $request->file('photo')->store('photos');
+            $request->request->add(['photo_path' => $path]);
+        }
+
+        event(new FilmCreated($film = $this->createFilm($request->all())));
 
         return new FilmResource($film);
     }
