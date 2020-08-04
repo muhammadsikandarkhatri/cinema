@@ -7,6 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+Cinema App for managing films. This small application on Vue.js v2 and Laravel 7.x is just for testing purposes not for production usage.
+
+# Installation Instructions
+
+## Backend
+
+```
+1. composer install
+
+2. Set APP_URL=http://dev.cinema.com in .env file
+
+3. Add this config var for vuejs 
+MIX_VUE_APP_API_URL=http://dev.cinema.com/api/v1
+
+4. php artisan key:generate
+
+5. php artisan config:cache
+
+6. php artisan migrate --seed
+
+7. php artisan passport:install
+
+8. php artisan storage:link
+
+```
+
+## Frontend
+
+```
+1. npm install
+2. npm run dev
+```
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
