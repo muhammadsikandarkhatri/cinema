@@ -3,10 +3,14 @@ import App from "./components/App";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
-
-// register jw pagination component globally
 import JwPagination from 'jw-vue-pagination';
-Vue.component('jw-pagination', JwPagination);
+import Datepicker from 'vuejs-datepicker';
+import VueMoment from 'vue-moment';
+
+/**
+ * Inject Dependencies
+ */
+Vue.use(VueMoment);
 
 Vue.config.productionTip = false;
 
@@ -35,6 +39,15 @@ axios.interceptors.request.use(function(config) {
     return config;
 });
 
+/**
+ * register components globally
+ */
+Vue.component('jw-pagination', JwPagination);
+Vue.component('datepicker', Datepicker);
+
+/**
+ * Initialize App
+ */
 new Vue({
     router,
     store,
